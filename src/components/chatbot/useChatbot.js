@@ -2,6 +2,7 @@ import { useState, useCallback, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { processMessage, getGreeting, getStarterPrompts } from './chatEngine'
 import { useChatHistory } from './useChatHistory'
+
 let _id = 0
 const uid = () => `m${++_id}`
 

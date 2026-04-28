@@ -89,4 +89,3 @@ const UI = {
 }
 
 export const t = (lang, key) => UI[lang]?.[key] ?? UI.en[key] ?? key
-

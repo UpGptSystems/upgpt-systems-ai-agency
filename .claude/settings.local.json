@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/jashari/smile-dental/**)",
+      "Bash(npm install *)"
+    ]
+  }
+}

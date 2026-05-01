@@ -30,7 +30,8 @@ export const useChatbot = () => {
   const [showLangPicker,  setShowLangPicker] = useState(false)
 
   const introShownRef   = useRef(false)
-  const activeIdRef     = useRef(null)  // mirror for callbacks
+  const activeIdRef     = useRef(null)
+  const langLockedRef   = useRef(false)
 
   // ── Boot a session ────────────────────────────────────────────────────────
   const bootSession = useCallback((sessionId, existingMessages) => {
@@ -44,6 +45,7 @@ export const useChatbot = () => {
     }
 
     // Fresh session: ask language first, then greet
+    langLockedRef.current = false
     setMessages([])
     setShowStarters(false)
     setShowLangPicker(false)
@@ -103,8 +105,8 @@ export const useChatbot = () => {
     const { text: reply, lang: detectedLang, typingMs, navigateTo } =
       processMessage(trimmed, messages, currentLang)
 
-    // Persist detected language
-    if (detectedLang !== currentLang) {
+    // Only switch language if user hasn't explicitly chosen one yet
+    if (!langLockedRef.current && detectedLang !== currentLang) {
       setCurrentLang(detectedLang)
       try { localStorage.setItem('upgpt-lang', detectedLang) } catch {}
     }
@@ -151,6 +153,7 @@ export const useChatbot = () => {
   // ── Language selected from in-chat picker ─────────────────────────────────
   const handleLangSelect = useCallback((lang) => {
     setCurrentLang(lang)
+    langLockedRef.current = true
     try { localStorage.setItem('upgpt-lang', lang) } catch {}
     setShowLangPicker(false)
     setIsLocked(true)

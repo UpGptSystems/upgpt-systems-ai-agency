@@ -67,9 +67,9 @@ const contactInfo = [
   {
     icon: Mail,
     label: 'Email Us',
-    value: 'hello@upgptsystems.com',
+    value: 'upgptsystems@gmail.com',
     sub: 'We reply within 24 hours',
-    href: 'mailto:hello@upgptsystems.com',
+    href: 'mailto:upgptsystems@gmail.com',
   },
   {
     icon: Calendar,
@@ -178,7 +178,7 @@ export default function Contact() {
                         onChange={handleChange}
                         required
                         placeholder="John Smith"
-                        className="w-full bg-white/4 border border-white/8 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-violet-500/60 focus:bg-white/6 transition-all duration-150"
+                        className="w-full bg-black border border-[#00E5FF]/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF]/20 transition-all duration-150"
                       />
                     </div>
                     <div>
@@ -192,7 +192,7 @@ export default function Contact() {
                         onChange={handleChange}
                         required
                         placeholder="john@company.com"
-                        className="w-full bg-white/4 border border-white/8 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-violet-500/60 focus:bg-white/6 transition-all duration-150"
+                        className="w-full bg-black border border-[#00E5FF]/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF]/20 transition-all duration-150"
                       />
                     </div>
                   </div>
@@ -206,7 +206,7 @@ export default function Contact() {
                       value={form.company}
                       onChange={handleChange}
                       placeholder="Acme Inc."
-                      className="w-full bg-white/4 border border-white/8 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-violet-500/60 focus:bg-white/6 transition-all duration-150"
+                      className="w-full bg-black border border-[#00E5FF]/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF]/20 transition-all duration-150"
                     />
                   </div>
 
@@ -219,7 +219,7 @@ export default function Contact() {
                         name="service"
                         value={form.service}
                         onChange={handleChange}
-                        className="w-full bg-[#0c0c1e] border border-white/8 rounded-xl px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-violet-500/60 transition-all duration-150 appearance-none cursor-pointer"
+                        className="w-full bg-black border border-[#00E5FF]/20 rounded-xl px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF]/20 transition-all duration-150 appearance-none cursor-pointer"
                       >
                         <option value="" disabled>Select a service…</option>
                         {services.map((s) => (
@@ -235,7 +235,7 @@ export default function Contact() {
                         name="budget"
                         value={form.budget}
                         onChange={handleChange}
-                        className="w-full bg-[#0c0c1e] border border-white/8 rounded-xl px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-violet-500/60 transition-all duration-150 appearance-none cursor-pointer"
+                        className="w-full bg-black border border-[#00E5FF]/20 rounded-xl px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF]/20 transition-all duration-150 appearance-none cursor-pointer"
                       >
                         <option value="" disabled>Select a range…</option>
                         {budgets.map((b) => (
@@ -256,7 +256,7 @@ export default function Contact() {
                       required
                       rows={4}
                       placeholder="What does your business do? What problem are you trying to solve? What's your current bottleneck?"
-                      className="w-full bg-white/4 border border-white/8 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-violet-500/60 focus:bg-white/6 transition-all duration-150 resize-none"
+                      className="w-full bg-black border border-[#00E5FF]/20 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#00E5FF] focus:ring-1 focus:ring-[#00E5FF]/20 transition-all duration-150 resize-none"
                     />
                   </div>
 

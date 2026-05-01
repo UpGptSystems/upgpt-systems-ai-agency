@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, Calendar, Zap, ArrowRight, CheckCircle, MapPin } from 'lucide-react'
+import { Mail, Phone, Calendar, Zap, ArrowRight, CheckCircle, CreditCard, Shield } from 'lucide-react'
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 28 },
@@ -8,6 +8,43 @@ const fadeUp = (delay = 0) => ({
   viewport: { once: true },
   transition: { duration: 0.6, delay, ease: [0.16, 1, 0.3, 1] },
 })
+
+// Replace these with your real Stripe Payment Links from dashboard.stripe.com
+const stripePlans = [
+  {
+    name: 'Starter',
+    label: 'AI Website Chatbot + Lead Capture',
+    price: '€1,497',
+    priceLabel: 'once',
+    priceMonthly: '€397',
+    priceMonthlyLabel: '/mo',
+    paymentLinkOneTime: 'https://buy.stripe.com/REPLACE_STARTER_ONE_TIME',
+    paymentLinkMonthly: 'https://buy.stripe.com/REPLACE_STARTER_MONTHLY',
+    popular: false,
+  },
+  {
+    name: 'Growth',
+    label: 'Full automation stack — most popular',
+    price: '€3,997',
+    priceLabel: 'once',
+    priceMonthly: '€897',
+    priceMonthlyLabel: '/mo',
+    paymentLinkOneTime: 'https://buy.stripe.com/REPLACE_GROWTH_ONE_TIME',
+    paymentLinkMonthly: 'https://buy.stripe.com/REPLACE_GROWTH_MONTHLY',
+    popular: true,
+  },
+  {
+    name: 'Premium',
+    label: 'Enterprise AI — unlimited scale',
+    price: '€8,997',
+    priceLabel: 'once',
+    priceMonthly: '€1,997',
+    priceMonthlyLabel: '/mo',
+    paymentLinkOneTime: 'https://buy.stripe.com/REPLACE_PREMIUM_ONE_TIME',
+    paymentLinkMonthly: 'https://buy.stripe.com/REPLACE_PREMIUM_MONTHLY',
+    popular: false,
+  },
+]
 
 const services = [
   'AI Website Chatbot',
@@ -19,6 +56,7 @@ const services = [
 ]
 
 const budgets = [
+  'Under €1,500',
   '€1,500 – €4,000',
   '€4,000 – €9,000',
   '€9,000+',
@@ -29,9 +67,9 @@ const contactInfo = [
   {
     icon: Mail,
     label: 'Email Us',
-    value: 'upgptsystems@gmail.com',
+    value: 'hello@upgptsystems.com',
     sub: 'We reply within 24 hours',
-    href: 'mailto:upgptsystems@gmail.com',
+    href: 'mailto:hello@upgptsystems.com',
   },
   {
     icon: Calendar,
@@ -60,6 +98,8 @@ export default function Contact() {
   })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [selectedPlan, setSelectedPlan] = useState('Growth')
+  const [billing, setBilling] = useState('oneTime')
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }))
@@ -78,6 +118,15 @@ export default function Contact() {
     } finally {
       setLoading(false)
     }
+  }
+
+  const activePlan = stripePlans.find((p) => p.name === selectedPlan)
+  const displayPrice = billing === 'oneTime' ? activePlan.price : activePlan.priceMonthly
+  const displayPriceLabel = billing === 'oneTime' ? activePlan.priceLabel : activePlan.priceMonthlyLabel
+
+  const handlePay = () => {
+    const link = billing === 'oneTime' ? activePlan.paymentLinkOneTime : activePlan.paymentLinkMonthly
+    window.open(link, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -107,8 +156,8 @@ export default function Contact() {
             <motion.div {...fadeUp()} className="lg:col-span-3">
               {submitted ? (
                 <div className="glass rounded-2xl p-12 text-center h-full flex flex-col items-center justify-center">
-                  <div className="w-16 h-16 rounded-full bg-[#00E5FF]/10 border border-[#00E5FF]/30 flex items-center justify-center mb-6">
-                    <CheckCircle className="w-8 h-8 text-[#00E5FF]" />
+                  <div className="w-16 h-16 rounded-full bg-violet-600/20 border border-violet-500/30 flex items-center justify-center mb-6">
+                    <CheckCircle className="w-8 h-8 text-violet-400" />
                   </div>
                   <h3 className="text-2xl font-black text-white mb-3">Message Sent!</h3>
                   <p className="text-white/55 max-w-sm">
@@ -117,10 +166,7 @@ export default function Contact() {
                   </p>
                 </div>
               ) : (
-                <form
-                  onSubmit={handleSubmit}
-                  className="glass rounded-2xl p-8 space-y-5"
-                >
+                <form onSubmit={handleSubmit} className="glass rounded-2xl p-8 space-y-5">
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-xs font-semibold text-white/40 uppercase tracking-widest mb-2">
@@ -132,7 +178,7 @@ export default function Contact() {
                         onChange={handleChange}
                         required
                         placeholder="John Smith"
-                        className="w-full bg-black border border-[#00E5FF]/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#00E5FF]/60 focus:ring-1 focus:ring-[#00E5FF]/20 transition-all duration-150"
+                        className="w-full bg-white/4 border border-white/8 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-violet-500/60 focus:bg-white/6 transition-all duration-150"
                       />
                     </div>
                     <div>
@@ -146,7 +192,7 @@ export default function Contact() {
                         onChange={handleChange}
                         required
                         placeholder="john@company.com"
-                        className="w-full bg-black border border-[#00E5FF]/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#00E5FF]/60 focus:ring-1 focus:ring-[#00E5FF]/20 transition-all duration-150"
+                        className="w-full bg-white/4 border border-white/8 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-violet-500/60 focus:bg-white/6 transition-all duration-150"
                       />
                     </div>
                   </div>
@@ -160,7 +206,7 @@ export default function Contact() {
                       value={form.company}
                       onChange={handleChange}
                       placeholder="Acme Inc."
-                      className="w-full bg-black border border-[#00E5FF]/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#00E5FF]/60 focus:ring-1 focus:ring-[#00E5FF]/20 transition-all duration-150"
+                      className="w-full bg-white/4 border border-white/8 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-violet-500/60 focus:bg-white/6 transition-all duration-150"
                     />
                   </div>
 
@@ -173,7 +219,7 @@ export default function Contact() {
                         name="service"
                         value={form.service}
                         onChange={handleChange}
-                        className="w-full bg-black border border-[#00E5FF]/15 rounded-xl px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-[#00E5FF]/60 focus:ring-1 focus:ring-[#00E5FF]/20 transition-all duration-150 appearance-none cursor-pointer"
+                        className="w-full bg-[#0c0c1e] border border-white/8 rounded-xl px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-violet-500/60 transition-all duration-150 appearance-none cursor-pointer"
                       >
                         <option value="" disabled>Select a service…</option>
                         {services.map((s) => (
@@ -189,7 +235,7 @@ export default function Contact() {
                         name="budget"
                         value={form.budget}
                         onChange={handleChange}
-                        className="w-full bg-black border border-[#00E5FF]/15 rounded-xl px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-[#00E5FF]/60 focus:ring-1 focus:ring-[#00E5FF]/20 transition-all duration-150 appearance-none cursor-pointer"
+                        className="w-full bg-[#0c0c1e] border border-white/8 rounded-xl px-4 py-3 text-sm text-white/70 focus:outline-none focus:border-violet-500/60 transition-all duration-150 appearance-none cursor-pointer"
                       >
                         <option value="" disabled>Select a range…</option>
                         {budgets.map((b) => (
@@ -208,9 +254,9 @@ export default function Contact() {
                       value={form.message}
                       onChange={handleChange}
                       required
-                      rows={5}
+                      rows={4}
                       placeholder="What does your business do? What problem are you trying to solve? What's your current bottleneck?"
-                      className="w-full bg-black border border-[#00E5FF]/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-[#00E5FF]/60 focus:ring-1 focus:ring-[#00E5FF]/20 transition-all duration-150 resize-none"
+                      className="w-full bg-white/4 border border-white/8 rounded-xl px-4 py-3 text-sm text-white placeholder-white/25 focus:outline-none focus:border-violet-500/60 focus:bg-white/6 transition-all duration-150 resize-none"
                     />
                   </div>
 
@@ -232,9 +278,101 @@ export default function Contact() {
                     )}
                   </button>
 
-                  <p className="text-xs text-white/25 text-center">
-                    We respond within 24 hours. No spam, ever.
-                  </p>
+                  <div className="relative flex items-center gap-3 py-1">
+                    <div className="flex-1 h-px bg-white/8" />
+                    <span className="text-xs text-white/30 whitespace-nowrap">or pay now and get started immediately</span>
+                    <div className="flex-1 h-px bg-white/8" />
+                  </div>
+
+                  <div>
+                    <p className="text-xs font-semibold text-white/40 uppercase tracking-widest mb-3">
+                      Select Your Plan
+                    </p>
+                    <div className="space-y-2">
+                      {stripePlans.map((plan) => {
+                        const isSelected = selectedPlan === plan.name
+                        const planPrice = billing === 'oneTime' ? plan.price : plan.priceMonthly
+                        const planPriceLabel = billing === 'oneTime' ? plan.priceLabel : plan.priceMonthlyLabel
+                        return (
+                          <button
+                            key={plan.name}
+                            type="button"
+                            onClick={() => setSelectedPlan(plan.name)}
+                            className={`w-full flex items-center gap-4 px-4 py-3.5 rounded-xl border text-left transition-all duration-150 ${
+                              isSelected
+                                ? 'border-violet-500/60 bg-violet-600/10'
+                                : 'border-white/8 bg-white/2 hover:border-white/15'
+                            }`}
+                          >
+                            <div className={`w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center transition-colors ${
+                              isSelected ? 'border-violet-500' : 'border-white/25'
+                            }`}>
+                              {isSelected && <div className="w-2 h-2 rounded-full bg-violet-500" />}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className="text-sm font-semibold text-white">{plan.name}</span>
+                                {plan.popular && (
+                                  <span className="px-2 py-0.5 rounded-full bg-violet-600/30 border border-violet-500/40 text-[10px] font-bold text-violet-300 uppercase tracking-wide">
+                                    Popular
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-xs text-white/40 mt-0.5">{plan.label}</p>
+                            </div>
+                            <div className="text-right flex-shrink-0">
+                              <span className="text-sm font-black text-white">{planPrice}</span>
+                              <span className="text-xs text-white/35 ml-1">{planPriceLabel}</span>
+                            </div>
+                          </button>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center glass rounded-lg p-1 gap-1 w-fit">
+                    <button
+                      type="button"
+                      onClick={() => setBilling('oneTime')}
+                      className={`px-4 py-1.5 rounded-md text-xs font-semibold transition-all duration-150 ${
+                        billing === 'oneTime' ? 'bg-violet-600 text-white' : 'text-white/45 hover:text-white'
+                      }`}
+                    >
+                      One-Time Setup
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setBilling('monthly')}
+                      className={`px-4 py-1.5 rounded-md text-xs font-semibold transition-all duration-150 ${
+                        billing === 'monthly' ? 'bg-violet-600 text-white' : 'text-white/45 hover:text-white'
+                      }`}
+                    >
+                      Monthly Retainer
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={handlePay}
+                    className="btn-primary glow-violet w-full justify-center py-4 text-base"
+                  >
+                    <CreditCard className="w-5 h-5" />
+                    Pay {displayPrice}{displayPriceLabel !== 'once' ? displayPriceLabel : ''} — {activePlan.name} Plan
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+
+                  <div className="flex items-center justify-center gap-6 pt-1">
+                    {[
+                      { icon: Shield, text: 'SSL Encrypted' },
+                      { icon: CreditCard, text: 'Secured by Stripe' },
+                      { icon: CheckCircle, text: 'Instant Confirmation' },
+                    ].map(({ icon: Icon, text }) => (
+                      <div key={text} className="flex items-center gap-1.5 text-white/25 text-xs">
+                        <Icon className="w-3 h-3" />
+                        {text}
+                      </div>
+                    ))}
+                  </div>
                 </form>
               )}
             </motion.div>
@@ -244,10 +382,10 @@ export default function Contact() {
                 <a
                   key={c.label}
                   href={c.href}
-                  className="glass rounded-2xl p-6 flex items-start gap-4 hover:border-[#00E5FF]/30 transition-all duration-200 group block"
+                  className="glass rounded-2xl p-6 flex items-start gap-4 hover:border-violet-500/30 transition-all duration-200 group block"
                 >
-                  <div className="w-11 h-11 rounded-xl bg-[#00E5FF]/10 border border-[#00E5FF]/20 flex items-center justify-center flex-shrink-0 group-hover:bg-[#00E5FF]/15 transition-colors">
-                    <c.icon className="w-5 h-5 text-[#00E5FF]" />
+                  <div className="w-11 h-11 rounded-xl bg-violet-600/15 border border-violet-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-violet-600/25 transition-colors">
+                    <c.icon className="w-5 h-5 text-violet-400" />
                   </div>
                   <div>
                     <p className="text-xs font-semibold text-white/35 uppercase tracking-widest mb-0.5">
@@ -261,22 +399,22 @@ export default function Contact() {
 
               <div
                 id="booking"
-                className="glass rounded-2xl p-7 border border-[#00E5FF]/20"
-                style={{ boxShadow: '0 0 40px rgba(0,229,255,0.08)' }}
+                className="glass rounded-2xl p-7 border border-violet-500/20"
+                style={{ boxShadow: '0 0 40px rgba(124,58,237,0.08)' }}
               >
                 <p className="text-sm font-semibold text-white mb-1">What happens next?</p>
                 <p className="text-white/45 text-sm mb-5">
-                  After you send your message, here's exactly what to expect:
+                  After you send your message or pay, here's what to expect:
                 </p>
                 <ol className="space-y-4">
                   {[
                     { n: '01', text: 'We review your project and requirements (within 24h)' },
-                    { n: '02', text: "You receive a personalized response with our recommendation" },
+                    { n: '02', text: 'You receive a personalised response with our recommendation' },
                     { n: '03', text: 'We schedule a 30-min call to align on scope and timeline' },
-                    { n: '04', text: 'You receive a detailed proposal — no obligation to proceed' },
+                    { n: '04', text: 'Your system is built and live within 7–14 days' },
                   ].map((step) => (
                     <li key={step.n} className="flex items-start gap-3">
-                      <span className="text-xl font-black leading-none w-6 flex-shrink-0" style={{ color: '#00E5FF', opacity: 0.5 }}>
+                      <span className="text-xl font-black text-gradient-violet opacity-50 leading-none w-6 flex-shrink-0">
                         {step.n}
                       </span>
                       <span className="text-sm text-white/55 leading-relaxed">{step.text}</span>

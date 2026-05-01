@@ -47,7 +47,7 @@ export default function Footer() {
                 <Instagram className="w-4 h-4" />
               </a>
               <a
-                href="mailto:upgptsystems@gmail.com"
+                href="mailto:hello@upgptsystems.com"
                 className="w-9 h-9 rounded-lg glass border border-white/8 flex items-center justify-center text-white/40 hover:text-white hover:border-white/20 transition-all"
                 aria-label="Email"
               >

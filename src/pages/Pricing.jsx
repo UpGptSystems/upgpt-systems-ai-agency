@@ -55,7 +55,7 @@ const caseStudies = [
       { label: 'Revenue lift / month', before: '—', after: '€78,000' },
     ],
     breakeven: 'Paid back 8.6× in month one',
-    quote: 'We didn\'t need another lead-gen tool. UPGPT rebuilt the entire trial-to-member journey in 90 days and the numbers are honestly hard to argue with.',
+    quote: "We didn't need another lead-gen tool. UPGPT rebuilt the entire trial-to-member journey in 90 days and the numbers are honestly hard to argue with.",
     author: 'Michael Hoffmann',
     role: 'Founder, ELEVATE Studios',
   },
@@ -80,6 +80,7 @@ const plans = [
       'Multi-Platform Coverage': false,
       'Monthly Optimisation Reports': false,
       '24/7 Priority Support': false,
+      'AI Voice Agents': false,
     },
     extras: [
       'Basic FAQ automation',
@@ -110,6 +111,7 @@ const plans = [
       'Multi-Platform Coverage': false,
       'Monthly Optimisation Reports': false,
       '24/7 Priority Support': false,
+      'AI Voice Agents': false,
     },
     extras: [
       'Custom conversation design',
@@ -140,6 +142,7 @@ const plans = [
       'Multi-Platform Coverage': true,
       'Monthly Optimisation Reports': true,
       '24/7 Priority Support': true,
+      'AI Voice Agents': true,
     },
     extras: [
       'Unlimited conversations',
@@ -165,6 +168,7 @@ const featureOrder = [
   'Multi-Platform Coverage',
   'Monthly Optimisation Reports',
   '24/7 Priority Support',
+  'AI Voice Agents',
 ]
 
 const faqs = [

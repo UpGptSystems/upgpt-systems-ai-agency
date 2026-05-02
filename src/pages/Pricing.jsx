@@ -63,7 +63,7 @@ const caseStudies = [
 
 const plans = [
   {
-    name: 'Starter',
+    name: 'Foundation',
     oneTime: '1,497',
     monthly: '397',
     months: 4,
@@ -90,11 +90,11 @@ const plans = [
       '30-day support included',
     ],
     popular: false,
-    cta: 'Get Started',
+    cta: 'Get Audit',
     ctaLink: '/contact',
   },
   {
-    name: 'Growth',
+    name: 'Conversion System',
     oneTime: '3,997',
     monthly: '897',
     months: 5,
@@ -121,11 +121,11 @@ const plans = [
       'Onboarding & training call',
     ],
     popular: true,
-    cta: 'Get Started',
+    cta: 'Get Audit',
     ctaLink: '/contact',
   },
   {
-    name: 'Premium',
+    name: 'Full Automation Suite',
     oneTime: '8,997',
     monthly: '1,997',
     months: 5,
@@ -213,12 +213,14 @@ export default function Pricing() {
             Pricing
           </motion.div>
           <motion.h1 {...fadeUp(0.1)} className="text-5xl lg:text-6xl font-black text-white mb-5">
-            Invest Once.{' '}
-            <span className="text-gradient">Profit Forever.</span>
+            Simple Pricing.{' '}
+            <span className="text-gradient">Built to Generate Revenue.</span>
           </motion.h1>
-          <motion.p {...fadeUp(0.2)} className="text-xl text-white/50 mb-10">
-            No hidden fees. No surprise bills. Just a system that pays for itself — typically within
-            the first 60 days.
+          <motion.p {...fadeUp(0.2)} className="text-xl text-white/50 mb-3">
+            For most clients, recovering just 2–3 missed leads covers the entire investment.
+          </motion.p>
+          <motion.p {...fadeUp(0.25)} className="text-sm text-white/35 mb-10">
+            We only take a limited number of clients per month due to custom setup.
           </motion.p>
 
           <motion.div {...fadeUp(0.3)} className="inline-flex items-center glass rounded-xl p-1 gap-1">

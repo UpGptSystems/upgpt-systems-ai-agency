@@ -84,8 +84,8 @@ function HeroSection() {
             transition={{ duration: 0.6, delay: 0.25 }}
             className="text-[17px] text-white/55 leading-relaxed mb-9 max-w-[480px]"
           >
-            We build custom AI chatbot systems for your website, WhatsApp, and CRM — so your
-            business captures leads, handles support, and closes sales while you sleep.
+            We install systems that capture every lead, follow up instantly, and turn more inquiries into
+            paying customers — so your business generates more revenue while you sleep.
           </motion.p>
 
           <motion.div

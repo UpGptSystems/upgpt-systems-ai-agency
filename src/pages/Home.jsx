@@ -541,7 +541,7 @@ function TestimonialsSection() {
 function PricingSection() {
   const plans = [
     {
-      name: 'Starter',
+      name: 'Foundation',
       price: '1,497',
       sub: 'One-time setup',
       description: 'Perfect for small businesses ready to automate their first touchpoint.',
@@ -554,10 +554,10 @@ function PricingSection() {
         'Up to 500 conversations/mo',
       ],
       popular: false,
-      cta: 'Get Started',
+      cta: 'Get Audit',
     },
     {
-      name: 'Growth',
+      name: 'Conversion System',
       price: '3,997',
       sub: 'One-time setup',
       description: 'The most popular choice for growing businesses that want full automation.',
@@ -571,10 +571,10 @@ function PricingSection() {
         'Custom conversation design',
       ],
       popular: true,
-      cta: 'Get Started',
+      cta: 'Get Audit',
     },
     {
-      name: 'Premium',
+      name: 'Full Automation Suite',
       price: '8,997',
       sub: 'One-time setup',
       description: 'Enterprise-level AI infrastructure. Unlimited scale, dedicated support.',
@@ -587,6 +587,7 @@ function PricingSection() {
         'Unlimited conversations',
         'Monthly optimisation reports',
         'Priority 24/7 support',
+        'AI Voice Agents',
       ],
       popular: false,
       cta: 'Contact Us',
